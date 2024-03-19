@@ -23,11 +23,8 @@ function Home() {
 
   return (
     <Swiper
-      // modules={[Navigation, Pagination, Autoplay]}
       spaceBetween={30}
       slidesPerView={1}
-     
-     
     >
       {slides.map((slide, index) => (
         <SwiperSlide key={index}>
@@ -54,6 +51,7 @@ function Home() {
         </SwiperSlide>
       ))}
     </Swiper>
+    
   );
 }
 

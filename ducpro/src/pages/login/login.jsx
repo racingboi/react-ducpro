@@ -20,16 +20,15 @@ export default function Login() {
         theme: "light",
         transition: Bounce,
       });
-      return; // Ngừng thực hiện hàm nếu dữ liệu chưa đủ
+      return;
     }
-      // Fetch users from the mock API
     const response = await axios.get('http://localhost:3000/users');
       const users = response.data;
       const user = users.find(user => user.username === username && user.password === password);
 
     if (user) {
       localStorage.setItem('user', JSON.stringify(user));
-        toast.success('Tạo tài khoản thành công!', {
+        toast.success('Đăng nhập thành công!', {
           position: "top-right",
           autoClose: 5000,
           hideProgressBar: false,

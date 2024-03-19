@@ -14,7 +14,9 @@ import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
 import { useNavigate } from 'react-router-dom';
 import './style.css';
-const pages = ['Home', 'cv', 'login', 'register'];
+import { Bounce, toast } from 'react-toastify';
+import { FcHome } from "react-icons/fc";
+const pages = ['Home', 'cv', 'login', 'register','products'];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 function Header() {
   
@@ -22,9 +24,9 @@ function Header() {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
   const user = JSON.parse(localStorage.getItem('user'));
-  if (user) { 
-    console.log("User is logged in");
-  } else { navigate('/login')}
+  // if (user) { 
+  //   // console.log("User is logged in");
+  // } else { navigate('/login')}
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -54,6 +56,17 @@ function Header() {
         break;
       case 'Logout':
         localStorage.removeItem('user');
+        toast.success('Đăng xuất thành công!', {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+          transition: Bounce,
+        });
         navigate('/login');
         break;
       default:
@@ -64,7 +77,7 @@ function Header() {
     <AppBar position="static">
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-          <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
+          <FcHome/>
           <Typography
             variant="h6"
             noWrap
@@ -80,7 +93,7 @@ function Header() {
               textDecoration: 'none',
             }}
           >
-            LOGO
+            Ducpro
           </Typography>
 
           <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
@@ -154,10 +167,16 @@ function Header() {
           </Box>
 
           <Box sx={{ flexGrow: 0 }}>
-            {user && (
+            {user ? (
               <Tooltip title={user.username}>
                 <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                   <Avatar alt="Avatar" src={user.img} />
+                </IconButton>
+              </Tooltip>
+            ) : (
+                <Tooltip title='Avatar'>
+                <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+                  <Avatar alt="Avatar" src='https://via.placeholder.com/150' />
                 </IconButton>
               </Tooltip>
             )}

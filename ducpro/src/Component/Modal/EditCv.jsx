@@ -17,7 +17,7 @@ const style = {
   p: 4,
 };
 
-export default function EditCv(onUpdateusers) {
+export default function EditCv({ onUpdateuser }) {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -57,7 +57,7 @@ export default function EditCv(onUpdateusers) {
         'address': address
       }
       localStorage.setItem('users', JSON.stringify(users));
-      onUpdateusers(users);
+      onUpdateuser(users);
       toast.success('Sửa Thành Công!', {
         position: "top-right",
         autoClose: 5000,
@@ -69,9 +69,8 @@ export default function EditCv(onUpdateusers) {
         theme: "light",
         transition: Bounce,
       });
-      handleClose();
     }
-    // console.log(users);
+    handleClose();
   }
   const handleNameChange = (event) => {
     setName(event.target.value);

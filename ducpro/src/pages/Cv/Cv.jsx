@@ -20,8 +20,7 @@ export default function Cv() {
       setAddress(parsedusersData.address);
     }
   }, []);
-  const onUpdateusers = (updatedusers) => {
-    // Cập nhật thông tin người dùng khi được gọi từ ModalDuc
+  const onUpdateuser = (updatedusers) => {
     setName(updatedusers.name);
     setMssv(updatedusers.mssv);
     setPhone(updatedusers.phone);
@@ -35,13 +34,13 @@ export default function Cv() {
           <div className="row">
             <div className="col-lg-4 col-md-5 xs-margin-30px-bottom">
               <div className="team-single-img">
-                <img className='w-100' src="https://scontent.fbmv1-1.fna.fbcdn.net/v/t39.30808-1/271687508_448485783593541_8314626224747176482_n.jpg?stp=dst-jpg_p240x240&_nc_cat=106&ccb=1-7&_nc_sid=5f2048&_nc_ohc=XWBJXAzl72cAX-I6aoK&_nc_ht=scontent.fbmv1-1.fna&oh=00_AfDhOUh2okBLQ_cAtRrnaU1jgN_6D5lyhm2xAVUcbbLPbQ&oe=65F06A9A" alt="" />
+                <img className='w-100' src="https://scontent.fdad3-5.fna.fbcdn.net/v/t39.30808-6/271687508_448485783593541_8314626224747176482_n.jpg?_nc_cat=106&ccb=1-7&_nc_sid=5f2048&_nc_ohc=Tpk4sMTG_okAX_UNgqA&_nc_ht=scontent.fdad3-5.fna&oh=00_AfDPbn9GUdPxWiiwskM7ekSYLP6TZBXT1z99H9E0IyI4Bw&oe=65F78CE0" alt="" />
               </div>
               <div className="bg-light-gray padding-30px-all md-padding-25px-all sm-padding-20px-all text-center">
                 <h4 className="margin-10px-bottom font-size24 md-font-size22 sm-font-size20 font-weight-600">{name}</h4>
                 <p className="sm-width-95 sm-margin-auto">{mssv}</p>
                 <div className="margin-20px-top team-single-icons">
-                  <EditCv onUpdateusers={onUpdateusers} />
+                  <EditCv onUpdateuser={onUpdateuser} />
 
                 </div>
               </div>

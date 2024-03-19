@@ -49,6 +49,12 @@ export default function Register() {
         theme: "light",
         transition: Bounce,
       });
+      const user = {
+        username,
+        password,
+        img,
+      }
+      localStorage.setItem('user', JSON.stringify(user));
       navigate('/');
     } catch (error) {
       toast.error('Tạo tài khoản không thành công!', {

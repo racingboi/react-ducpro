@@ -1,0 +1,14 @@
+.not-found-container {
+  text-align: center;
+  margin-top: 100px;
+}
+
+.not-found-title {
+  font-size: 2rem;
+  color: red;
+}
+
+.not-found-text {
+  font-size: 1.2rem;
+  color: grey;
+}
