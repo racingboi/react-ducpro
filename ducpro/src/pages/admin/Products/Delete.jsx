@@ -3,6 +3,7 @@ import axios from 'axios'; // Đừng quên import axios
 import { toast } from 'react-toastify';
 import { confirmAlert } from 'react-confirm-alert'; // Import
 import 'react-confirm-alert/src/react-confirm-alert.css';
+import DeleteIcon from '@mui/icons-material/Delete';
 // Giả sử handleDelete được gọi từ nơi nào đó có truyền props là productId và setProducts
 export default function Delete({ productId, onProductDelete }) {
 
@@ -49,6 +50,6 @@ export default function Delete({ productId, onProductDelete }) {
   };
 
   return (
-    <button className="btn btn-danger ml-2" onClick={handleDelete}>Xóa Sản Phẩm</button>
+    <button className="btn btn-danger ml-2" onClick={handleDelete}><DeleteIcon/></button>
   );
 }

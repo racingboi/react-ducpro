@@ -5,11 +5,12 @@ import Delete from "./Delete";
 import Edit from "./Edit";
 import { Pagination } from 'react-bootstrap';
 import { Link } from "react-router-dom";
+import formatPrice from "../../../Component/formatPrice/formatPrice";
 export default function Products() {
   const [products, setProducts] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
-  const productsPerPage = 6;
+  const productsPerPage = 5;
 
   const fetchProducts = () => {
     axios.get('http://localhost:3000/products')
@@ -61,26 +62,41 @@ export default function Products() {
           />
         </div>
       </div>
-      <div className="row">
-        {currentProducts.map(product => (
-          <div key={product.id} className="col-md-4">
-            <div className="card mb-4">
-              <div className="card-body">
-                <Link to={`/products/${product.id}`}>
-                <img src={product.img} alt={product.name} height="200" />
-                </Link>
-                <a href={`/products/${product.id}`} className="text-decoration-none card-title">
+      <div className="container">
+        <table className="table text-center table-hover">
+          <thead>
+            <tr>
+              <th>Image</th>
+              <th>Name</th>
+              <th>Price</th>
+              <th>Description</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            {currentProducts.map(product => (
+              <tr key={product.id}>
+                <td>
+                  <Link to={`/products/${product.id}`}>
+                    <img src={product.img} alt={product.name} style={{ height: "50px", width: "auto" }} />
+                  </Link>
+                </td>
+                <td>
+                  <Link to={`/products/${product.id}`} className="text-decoration-none">
+                    {product.name}
+                  </Link>
+                </td>
+                <td>{formatPrice(product.price)}</td>
 
-                <h3 className="card-title">{product.name}</h3>  
-                </a>
-                <p className="card-text">Price: {product.price}</p>
-                <p className="card-text">Description: {product.description}</p>
-                <Edit productId={product.id} onProductUpdated={handleProductUpdated} />
-                <Delete productId={product.id} onProductDelete={handleProductDelete} />
-              </div>
-            </div>
-          </div>
-        ))}
+                <td>{product.description}</td>
+                <td>
+                  <Edit productId={product.id} onProductUpdated={handleProductUpdated} />
+                  <Delete productId={product.id} onProductDelete={handleProductDelete} />
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
       </div>
       <div className="d-flex justify-content-center align-items-center mb-2">
         <Pagination>

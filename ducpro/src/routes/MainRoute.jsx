@@ -8,14 +8,14 @@ import Profile from '../pages/Profile/Profile';
 import Products from '../pages/Products/Products';
 import NotFound from '../pages/NotFound/NotFound';
 import ProductDetail from '../pages/Products/ProductDetail/ProductDetail';
+import MiniDrawer from '../pages/text/test';
 
 export default function MainRoute() {
   return (
-
     <>
-      <Header />
-    <Routes>
-      <Route path='/' element={<Home />} />
+      {/* <Header /> */}
+      <Routes element= {<MiniDrawer/>}>
+        <Route path='/' element={<Home />} />
         <Route path='/profile' element={<Profile />} />
         <Route path='/cv' element={<Cv />} />
         <Route path='/login' element={<Login />} />
@@ -23,6 +23,7 @@ export default function MainRoute() {
         <Route path='/products' element={<Products />} />
         <Route path='*' element={<NotFound />} />
         <Route path='/products/:id' element={<ProductDetail />} />
+        <Route path='text' element={<MiniDrawer />} />
       </Routes>
       {/* <Footer/> */}
     </>

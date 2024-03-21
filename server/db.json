@@ -1,29 +1,39 @@
 {
   "users": [
     {
-      "id": "1",
-      "username": "ducpro",
-      "password": "12345678",
-      "img": "https://scontent.fsgn2-9.fna.fbcdn.net/v/t39.30808-6/271687508_448485783593541_8314626224747176482_n.jpg?_nc_cat=106&ccb=1-7&_nc_sid=5f2048&_nc_ohc=9g2MNEvkXMoAX85puja&_nc_ht=scontent.fsgn2-9.fna&oh=00_AfDHHmLFhfDaFA_J-nmg1dHYUP6Pc90YeZ3dioNQVG4Ylw&oe=65F592A0"
-    },
-    {
-      "username": "admin",
-      "password": "12345678",
-      "img": "https://images.fpt.shop/unsafe/filters:quality(90)/fptshop.com.vn/uploads/images/tin-tuc/164401/Originals/cung-cu-giai-nam-2.jpg",
-      "id": "0BBsLUP"
-    },
-    {
       "username": "duc",
       "password": "12345678",
       "img": "https://images.fpt.shop/unsafe/filters:quality(90)/fptshop.com.vn/uploads/images/tin-tuc/164401/Originals/cung-cu-giai-nam-2.jpg",
-      "id": "1RJa_Yv"
+      "id": "1RJa_Yv",
+      "role": "1"
+    },
+    {
+      "username": "admin",
+      "password": "4ZFAO9C7",
+      "img": "https://images.fpt.shop/unsafe/filters:quality(90)/fptshop.com.vn/uploads/images/tin-tuc/164401/Originals/cung-cu-giai-nam-2.jpg",
+      "role": "0",
+      "id": "K5qi4ky"
+    },
+    {
+      "username": "user",
+      "password": "4ZFAO9C7",
+      "img": "https://images.fpt.shop/unsafe/filters:quality(90)/fptshop.com.vn/uploads/images/tin-tuc/164401/Originals/cung-cu-giai-nam-2.jpg",
+      "role": "0",
+      "id": "G7w-1bv"
+    },
+    {
+      "username": "rangkingboy1",
+      "password": "4ZFAO9C7",
+      "img": "https://images.fpt.shop/unsafe/filters:quality(90)/fptshop.com.vn/uploads/images/tin-tuc/164401/Originals/cung-cu-giai-nam-2.jpg",
+      "role": "0",
+      "id": "R0ke7nR"
     }
   ],
   "products": [
     {
-      "name": "ducpro",
+      "name": "cua",
       "price": "120000",
-      "description": "111111",
+      "description": "dam cua",
       "img": "https://images.fpt.shop/unsafe/filters:quality(90)/fptshop.com.vn/uploads/images/tin-tuc/164401/Originals/cung-cu-giai-nam-2.jpg",
       "id": 8
     },
@@ -49,18 +59,25 @@
       "id": 11
     },
     {
-      "name": "đức trương",
-      "price": "12",
-      "description": "111111",
+      "name": "vippro 1111",
+      "price": "3000.000",
+      "description": "no thing",
       "img": "https://images.fpt.shop/unsafe/filters:quality(90)/fptshop.com.vn/uploads/images/tin-tuc/164401/Originals/cung-cu-giai-nam-2.jpg",
-      "id": 12
+      "id": 13
     },
     {
       "name": "đức trương",
-      "price": "1222",
+      "price": "120000",
       "description": "111111",
       "img": "https://images.fpt.shop/unsafe/filters:quality(90)/fptshop.com.vn/uploads/images/tin-tuc/164401/Originals/cung-cu-giai-nam-2.jpg",
-      "id": 13
+      "id": 14
+    },
+    {
+      "name": "đức trương",
+      "price": "120000",
+      "description": "111111",
+      "img": "https://images.fpt.shop/unsafe/filters:quality(90)/fptshop.com.vn/uploads/images/tin-tuc/164401/Originals/cung-cu-giai-nam-2.jpg",
+      "id": 15
     }
   ]
 }

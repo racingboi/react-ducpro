@@ -35,7 +35,8 @@ export default function Register() {
       await axios.post('http://localhost:3000/users', {
         username,
         password,
-        img
+        img,
+        role:'0'
       });
 
       toast.success('Tạo tài khoản thành công!', {
@@ -53,6 +54,7 @@ export default function Register() {
         username,
         password,
         img,
+        role: '0'
       }
       localStorage.setItem('user', JSON.stringify(user));
       navigate('/');

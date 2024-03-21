@@ -39,7 +39,14 @@ export default function Login() {
           theme: "light",
           transition: Bounce,
         });
-        navigate('/');
+        if (user.role === "1") {
+          console.log("User is an admin.");
+          navigate('/dashboard');
+  
+        } else if (user.role === "0") {
+          navigate('/');
+        console.log("User is a regular user.");
+      }
       } else {
         toast.error('Tên đăng nhập hoặc mật khẩu không chính xác!', {
           position: "top-right",

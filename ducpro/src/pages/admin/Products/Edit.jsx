@@ -3,6 +3,7 @@ import axios from 'axios';
 import { Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, TextField } from '@mui/material';
 import { toast } from 'react-toastify';
 import { styled } from '@mui/system';
+import EditIcon from '@mui/icons-material/Edit';
 export default function Edit({ productId, onProductUpdated }) {
   const [open, setOpen] = useState(false);
   const [product, setProduct] = useState({
@@ -64,7 +65,7 @@ export default function Edit({ productId, onProductUpdated }) {
         variant="outlined"
         onClick={handleClickOpen}
       >
-        Chỉnh Sửa
+        <EditIcon/>
       </CustomButton>
       <Dialog open={open} onClose={handleClose}>
         <form onSubmit={handleSubmit}>

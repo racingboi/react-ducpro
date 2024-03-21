@@ -1,13 +1,13 @@
 
 import { useCallback, useState } from 'react';
 import './App.css'
-import MainRoute from './routes/MainRoute'
 import PrintIcon from '@mui/icons-material/Print';
 import { SpeedDial, SpeedDialAction, SpeedDialIcon, ThemeProvider, createTheme } from '@mui/material';
 import LightModeOutlinedIcon from '@mui/icons-material/LightModeOutlined';
 import DarkModeIcon from '@mui/icons-material/DarkMode';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { AppRouter } from './routes/root';
 function App() {
   const [theme, setTheme] = useState(createTheme({
     palette: {
@@ -60,7 +60,7 @@ function App() {
       </SpeedDial>
     <div className="App">
       <ToastContainer />
-      <MainRoute />
+        <AppRouter />
       </div>
     </ThemeProvider>
   )
