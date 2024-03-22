@@ -7,7 +7,7 @@ import Header from "../Component/Header/Header";
 import Register from "../pages/register/Register";
 import Cv from "../pages/Cv/Cv";
 import Dashboard from "../pages/admin/dashboard/Dashboard";
-import Products from "../pages/admin/Products/Products";  
+import Products from "../pages/admin/Products/Products";
 import ProductDetail from "../pages/admin/Products/ProductDetail/ProductDetail";
 import User from "../pages/admin/users/User";
 import Index from "../pages/product";

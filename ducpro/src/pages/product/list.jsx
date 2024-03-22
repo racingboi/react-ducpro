@@ -26,13 +26,14 @@ export default function List() {
       <div className="card">
         <div className="card-body">
           <div className="row">
-            <div className="col-md-6">
+            <div className="col-md-5">
               <img src={product.img} alt={product.name} className="img-fluid" />
-              <h2 className="card-title">{product.name}</h2>
+              <h5 className="card-title py-3">
+                {product.name} - {formatPrice(product.price)}
+              </h5>
             </div>
-            <div className="col-md-6">
-              <p className="card-text">Price: {formatPrice(product.price)}</p>
-              <p className="card-text">{product.description}</p>
+            <div className="col-md-5">
+              <p className="card-text">Mô tả: {product.description}</p>
             </div>
           </div>
         </div>
