@@ -1,7 +1,12 @@
 import axios from 'axios';
-import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import { Bounce, toast } from 'react-toastify';
+import { gapi } from 'gapi-script';
+import LoginGoogle from '../../Component/Google/login';
+import LogoutGoogle from '../../Component/Google/Logout';
+import GoogleAuthComponent from '../../Component/Google/GoogleAuthComponent ';
+
 export default function Login() {
   const navigate = useNavigate();
   const [username, setUsername] = useState('');
@@ -62,6 +67,17 @@ export default function Login() {
       }
   };
 
+  const clientId = "786382295058-up1fmd3of0ri6u26962h5j1chbc4hmur.apps.googleusercontent.com";
+  useEffect(() => {
+    function start() {
+      gapi.client.init({
+        clientId: clientId,
+        scope: ""
+      })
+    }
+    gapi.load('client: auth2', start);
+  });
+
   return (
     <div className="container mt-5">
       <h2 className="text-center text-primary">Login Form</h2>
@@ -90,9 +106,13 @@ export default function Login() {
                 aria-label="Password"
               />
             </div>
+            {/* <LoginGoogle />
+            <LogoutGoogle/> */}
+            <GoogleAuthComponent/>
             <button type="submit" className="btn btn-primary btn-block mt-3">
               Login
             </button>
+            <Link to="/register">Dến đăng ký</Link>
           </form>
         </div>
       </div>

@@ -8,7 +8,9 @@ import DarkModeIcon from '@mui/icons-material/DarkMode';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { AppRouter } from './routes/root';
+
 function App() {
+
   const [theme, setTheme] = useState(createTheme({
     palette: {
       mode: 'dark',
@@ -36,7 +38,6 @@ function App() {
   const printDocument = useCallback(() => {
     window.print();
   }, []);
-
   return (
     <ThemeProvider theme={theme}>
       <SpeedDial

@@ -77,12 +77,12 @@ export default function Products() {
             {currentProducts.map(product => (
               <tr key={product.id}>
                 <td>
-                  <Link to={`/products/${product.id}`}>
+                  <Link to={`/dashboard/products/${product.id}`}>
                     <img src={product.img} alt={product.name} style={{ height: "50px", width: "auto" }} />
                   </Link>
                 </td>
                 <td>
-                  <Link to={`/products/${product.id}`} className="text-decoration-none">
+                  <Link to={`/dashboard/products/${product.id}`} className="text-decoration-none">
                     {product.name}
                   </Link>
                 </td>

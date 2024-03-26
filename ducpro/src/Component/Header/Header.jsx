@@ -14,9 +14,10 @@ import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
 import { useNavigate } from 'react-router-dom';
 import './style.css';
-import { Bounce, toast } from 'react-toastify';
+import {  toast } from 'react-toastify';
 import { FcHome } from "react-icons/fc";
 import PropTypes from 'prop-types';
+
 
 const pages = ['Home', 'cv', 'login', 'register','products'];
 const settings = ['Profile', 'Dashboard', 'Logout'];
@@ -46,13 +47,14 @@ function Header(props) {
   };
   const handleMenuItemClick = (setting) => {
     handleCloseUserMenu();
+    console.log(setting);
     switch (setting) {
       case 'Profile':
         navigate('/profile');
         break;
-      // case 'Account':
-      //   navigate('/');
-      //   break;
+      case 'Account':
+        navigate('/');
+        break;
       case 'Dashboard':
         if (user.role === '1') {
           navigate('/dashboard');
@@ -62,23 +64,13 @@ function Header(props) {
         break;
       case 'Logout':
         localStorage.removeItem('user');
-        toast.success('Đăng xuất thành công!', {
-          position: "top-right",
-          autoClose: 5000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: "light",
-          transition: Bounce,
-        });
+        toast.success('Đăng xuất thành công!');
         navigate('/login');
         break;
       default:
         break;
+      }
     }
-  };
   const container = window !== undefined ? () => window().document.body : undefined;
   return (
     <>

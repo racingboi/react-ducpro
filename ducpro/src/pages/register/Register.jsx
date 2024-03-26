@@ -1,7 +1,8 @@
 import axios from 'axios';
 import { Bounce, toast } from 'react-toastify';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
+import GoogleAuthComponent from '../../Component/Google/GoogleAuthComponent ';
 
 export default function Register() {
   const navigate = useNavigate();
@@ -32,11 +33,29 @@ export default function Register() {
     setLoading(true);
 
     try {
+      // Kiểm tra xem tài khoản đã tồn tại hay chưa
+      const response = await axios.get(`http://localhost:3000/users?username=${username}`);
+      if (response.data.length > 0) {
+        toast.error('Tài khoản đã tồn tại!', {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+          transition: Bounce,
+        });
+        return;
+      }
+
+      // Nếu tài khoản không tồn tại, tiến hành tạo mới
       await axios.post('http://localhost:3000/users', {
         username,
         password,
         img,
-        role:'0'
+        role: '0'
       });
 
       toast.success('Tạo tài khoản thành công!', {
@@ -118,7 +137,9 @@ export default function Register() {
               <button type="submit" className="btn btn-primary btn-block mt-3">
                 {loading ? 'Registering...' : 'Register'}
               </button>
+              <Link to="/login">đến login</Link>
             </form>
+            <GoogleAuthComponent/>
           </div>
         </div>
       </div>
