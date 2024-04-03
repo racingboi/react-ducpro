@@ -98,5 +98,13 @@
       "img": "https://images.fpt.shop/unsafe/filters:quality(90)/fptshop.com.vn/uploads/images/tin-tuc/164401/Originals/cung-cu-giai-nam-2.jpg",
       "id": 15
     }
+  ],
+  "cart": [
+    {
+      "user_id": "1RJa_Yv",
+      "product_id": 9,
+      "quantity": 1,
+      "id": 1
+    }
   ]
 }

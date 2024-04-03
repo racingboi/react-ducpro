@@ -34,6 +34,22 @@ export default function Index() {
   const indexOfFirstUser = indexOfLastuser - PerPage;
   const currentPageUsers = filtereduser.slice(indexOfFirstUser, indexOfLastuser);
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
+
+
+  const handladdCart = (id) => {
+    const user = JSON.parse(localStorage.getItem("user"));
+    const userId = user.id;
+    if (!user) return alert("Please login first!");
+    axios.post(`http://localhost:3000/cart`, {
+      "user_id": userId,
+      "product_id": id,
+      "quantity":"1"
+    }).then((response) => {
+    }).catch((err) => {
+      console.log(err);
+    });
+      
+  }
   return (
     <Container>
       <h1 className='p-3'>Product List</h1>
@@ -56,7 +72,7 @@ export default function Index() {
                   <h5 className="card-title">{product.name}</h5>
                 </Link>
                 <p className="card-text">Price: {formatPrice(product.price)}<br />{product.description}</p>
-                <a href="#" className="btn btn-primary">Add to Cart</a>
+                <button onClick={()=>handladdCart(product.id)} className="btn btn-primary">Add to Cart</button>
               </div>
             </div>
           </Grid>

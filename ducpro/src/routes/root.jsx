@@ -11,7 +11,9 @@ import Products from "../pages/admin/Products/Products";
 import ProductDetail from "../pages/admin/Products/ProductDetail/ProductDetail";
 import User from "../pages/admin/users/User";
 import Index from "../pages/product";
-import List from "../pages/product/list";
+import List from "../pages/product/list"; 
+import Cart from "../pages/cart/cart";
+
 export const AppRouter = () => {
   let element = useRoutes([
     {
@@ -33,7 +35,7 @@ export const AppRouter = () => {
           path: '/dashboard/products/:id',
           element: <ProductDetail />
         }, {
-          path: '/dashboard/users',
+          path: '/dashboard/user',
           element: <User />
         }
       ],
@@ -68,10 +70,14 @@ export const AppRouter = () => {
         {
           path: 'products/:id',
           element: < List />
+        }, {
+          path: 'cart',
+          element: < Cart />
         }
       ],
-    },
+    }
   ]);
 
+  
   return element;
 }

@@ -14,12 +14,13 @@ import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
 import { useNavigate } from 'react-router-dom';
 import './style.css';
-import {  toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 import { FcHome } from "react-icons/fc";
 import PropTypes from 'prop-types';
 
+import Cart from '../cart/Cart'; 
 
-const pages = ['Home', 'cv', 'login', 'register','products'];
+const pages = ['Home', 'cv', 'login', 'register', 'products','Layout','cart'];
 const settings = ['Profile', 'Dashboard', 'Logout'];
 function Header(props) {
   const { window } = props;
@@ -27,17 +28,12 @@ function Header(props) {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
   const user = JSON.parse(localStorage.getItem('user'));
-  // if (user) { 
-  //   // console.log("User is logged in");
-  // } else { navigate('/login')}
-
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
   };
   const handleOpenUserMenu = (event) => {
     setAnchorElUser(event.currentTarget);
   };
-
   const handleCloseNavMenu = () => {
     setAnchorElNav(null);
   };
@@ -69,8 +65,8 @@ function Header(props) {
         break;
       default:
         break;
-      }
     }
+  }
   const container = window !== undefined ? () => window().document.body : undefined;
   return (
     <>
@@ -82,7 +78,6 @@ function Header(props) {
               variant="h6"
               noWrap
               component="a"
-              href="/"
               sx={{
                 mr: 2,
                 display: { xs: 'none', md: 'flex' },
@@ -92,6 +87,7 @@ function Header(props) {
                 color: 'inherit',
                 textDecoration: 'none',
               }}
+              onClick={() => history.push('/')}
             >
               Ducpro
             </Typography>
@@ -133,24 +129,6 @@ function Header(props) {
               </Menu>
             </Box>
             <AdbIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
-            <Typography
-              variant="h5"
-              noWrap
-              component="a"
-              href="/"
-              sx={{
-                mr: 2,
-                display: { xs: 'flex', md: 'none' },
-                flexGrow: 1,
-                fontFamily: 'monospace',
-                fontWeight: 700,
-                letterSpacing: '.3rem',
-                color: 'inherit',
-                textDecoration: 'none',
-              }}
-            >
-              LOGO
-            </Typography>
             <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
               {pages.map((page) => (
                 <Button
@@ -166,6 +144,10 @@ function Header(props) {
               ))}
             </Box>
 
+            <Box sx={{ flexGrow: 0 }}>
+                <Cart/>
+            </Box>
+          
             <Box sx={{ flexGrow: 0 }}>
               {user ? (
                 <Tooltip title={user.username}>
@@ -207,9 +189,11 @@ function Header(props) {
           </Toolbar>
         </Container>
       </AppBar>
-      <Container >
-      {props.children}
-    </Container >
+      <Container  maxWidth="xl">
+        <Box sx={{ flexGrow: 1, display: 'flex', justifyContent: "space-between", alignItems: 'center' }}>
+          {props.children}
+        </Box>
+      </Container >
     </>
   );
 }

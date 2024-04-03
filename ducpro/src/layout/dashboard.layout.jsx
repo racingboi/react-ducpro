@@ -14,75 +14,81 @@ import MenuIcon from '@mui/icons-material/Menu';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import { useNavigate } from 'react-router-dom';
-import ProductionQuantityLimitsIcon from '@mui/icons-material/ProductionQuantityLimits';
-import DashboardIcon from '@mui/icons-material/Dashboard';
-import PersonIcon from '@mui/icons-material/Person';
 import { Avatar } from '@mui/material';
+import { navigationItems } from './MenuItem';
+
 const drawerWidth = 240;
 
 function DashboardLayout(props) {
   const { window } = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);
-  const [isClosing, setIsClosing] = React.useState(false);
   const navigate = useNavigate();
-  const handleNavigate = (link) => {
-    navigate(link);
-  }
-  const handleDrawerClose = () => {
-    setIsClosing(true);
+  const [expandedItemId, setExpandedItemId] = React.useState(null);
+  const handleNavigate = (path) => {
+    // Close the drawer
     setMobileOpen(false);
-  };
-
-  const handleDrawerTransitionEnd = () => {
-    setIsClosing(false);
+    // Navigate
+    navigate(path);
   };
 
   const handleDrawerToggle = () => {
-    if (!isClosing) {
-      setMobileOpen(!mobileOpen);
-    }
+    setMobileOpen(!mobileOpen);
   };
-  const navigationItems = [
-    { id: 'dashboard', text: 'Dashboard', icon: <DashboardIcon />, path: '/dashboard' },
-    { id: 'products', text: 'Products', icon: <ProductionQuantityLimitsIcon />, path: '/dashboard/products' },
-    { id: 'users', text: 'Users', icon: <PersonIcon />, path: '/dashboard/users' },
-  ];
-  const user = JSON.parse(localStorage.getItem('user'));
+  const toggleExpandItem = (itemId) => {
+    setExpandedItemId(expandedItemId === itemId ? null : itemId);
+  };
+  const renderNavigationItem = (item, level = 0) => (
+    <React.Fragment key={item.id}>
+      <ListItem disablePadding>
+        <ListItemButton onClick={() => item.children ? toggleExpandItem(item.id) : handleNavigate(item.path)}>
+          <ListItemIcon sx={{ ml: level * 2 }}>
+            {item.icon}
+          </ListItemIcon>
+          <ListItemText primary={item.text} />
+          {item.children && (
+            <IconButton
+              onClick={(e) => {
+                e.stopPropagation();
+                toggleExpandItem(item.id);
+              }}
+              sx={
+                {
+                  '&:hover': {
+                    backgroundColor: 'transparent',
+                  },
+                  '&.Mui-focusVisible': {
+                    outline: 'none'
+                  }
+                }}
+            >
+              {expandedItemId === item.id ? '-' : '+'}
+            </IconButton>
+          )}
+        </ListItemButton>
+      </ListItem>
+      {item.children && expandedItemId === item.id && (
+        <List component="div" disablePadding>
+          {item.children.map(child => renderNavigationItem(child, level + 1))} {/* Increase level for nested items */}
+        </List>
+      )}
+    </React.Fragment>
+  );
+
+  const user = JSON.parse(localStorage.getItem('user') || '{}');
   const drawer = (
     <div>
       <Toolbar>
-        {user ? (
-          <>
-            <Avatar alt="Avatar" src={user.img} />
-            <ListItemText className='px-3'>
-              {user.username}
-            </ListItemText>
-          </>
-        ) : (
-          <>
-            <Avatar alt="Avatar" src='https://via.placeholder.com/150' />
-            <ListItemText className='px-3'>
-              admin
-            </ListItemText>
-          </>
-        )}
+        <Avatar alt="Avatar" src={user.img || 'https://via.placeholder.com/150'} />
+        <ListItemText className='px-3'>
+          {user.username || 'admin'}
+        </ListItemText>
       </Toolbar>
 
       <List>
-        {navigationItems.map((item) => (
-          <ListItem key={item.id} disablePadding>
-            <ListItemButton onClick={() => handleNavigate(item.path)}>
-              <ListItemIcon>
-                {item.icon}
-              </ListItemIcon>
-              <ListItemText primary={item.text} />
-            </ListItemButton>
-          </ListItem>
-        ))}
+        {navigationItems.map(item => renderNavigationItem(item))}
       </List>
     </div>
   );
-
 
   const container = window !== undefined ? () => window().document.body : undefined;
 
@@ -120,8 +126,7 @@ function DashboardLayout(props) {
           container={container}
           variant="temporary"
           open={mobileOpen}
-          onTransitionEnd={handleDrawerTransitionEnd}
-          onClose={handleDrawerClose}
+          onClose={() => setMobileOpen(false)}
           ModalProps={{
             keepMounted: true, // Better open performance on mobile.
           }}
@@ -149,7 +154,6 @@ function DashboardLayout(props) {
       >
         <Toolbar />
         {props.children}
-
       </Box>
     </Box>
   );
@@ -157,7 +161,6 @@ function DashboardLayout(props) {
 
 DashboardLayout.propTypes = {
   window: PropTypes.func,
-  // children: PropTypes.node
 };
 
 export default DashboardLayout;

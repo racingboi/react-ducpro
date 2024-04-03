@@ -3,10 +3,6 @@ import { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { Bounce, toast } from 'react-toastify';
 import { gapi } from 'gapi-script';
-import LoginGoogle from '../../Component/Google/login';
-import LogoutGoogle from '../../Component/Google/Logout';
-import GoogleAuthComponent from '../../Component/Google/GoogleAuthComponent ';
-
 export default function Login() {
   const navigate = useNavigate();
   const [username, setUsername] = useState('');
@@ -108,7 +104,6 @@ export default function Login() {
             </div>
             {/* <LoginGoogle />
             <LogoutGoogle/> */}
-            <GoogleAuthComponent/>
             <button type="submit" className="btn btn-primary btn-block mt-3">
               Login
             </button>

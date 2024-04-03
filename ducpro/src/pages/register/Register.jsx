@@ -2,7 +2,7 @@ import axios from 'axios';
 import { Bounce, toast } from 'react-toastify';
 import { Link, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
-import GoogleAuthComponent from '../../Component/Google/GoogleAuthComponent ';
+
 
 export default function Register() {
   const navigate = useNavigate();
@@ -139,7 +139,6 @@ export default function Register() {
               </button>
               <Link to="/login">đến login</Link>
             </form>
-            <GoogleAuthComponent/>
           </div>
         </div>
       </div>
