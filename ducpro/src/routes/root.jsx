@@ -13,6 +13,9 @@ import User from "../pages/admin/users/User";
 import Index from "../pages/product";
 import List from "../pages/product/list"; 
 import Cart from "../pages/cart/cart";
+import NotFound from "../pages/NotFound/NotFound";
+import NotFoundAdmin from "../pages/NotFound/NotFoundAdmin";
+import CheckOau from "../pages/checkoau/CheckOau";
 
 export const AppRouter = () => {
   let element = useRoutes([
@@ -37,6 +40,10 @@ export const AppRouter = () => {
         }, {
           path: '/dashboard/user',
           element: <User />
+        },
+        {
+          path: '*',
+          element: < NotFoundAdmin />
         }
       ],
     },
@@ -73,6 +80,14 @@ export const AppRouter = () => {
         }, {
           path: 'cart',
           element: < Cart />
+        },
+        {
+          path: '*',
+          element: < NotFound />
+        },
+        {
+          path: 'checkoau',
+          element: < CheckOau />
         }
       ],
     }

@@ -20,7 +20,7 @@ import PropTypes from 'prop-types';
 
 import Cart from '../cart/Cart'; 
 
-const pages = ['Home', 'cv', 'login', 'register', 'products','Layout','cart'];
+const pages = ['Home', 'cv', 'login', 'register', 'products'];
 const settings = ['Profile', 'Dashboard', 'Logout'];
 function Header(props) {
   const { window } = props;

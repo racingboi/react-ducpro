@@ -1,9 +1,10 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react'
 import formatPrice from '../../Component/formatPrice/formatPrice';
-import { Col, Container, Pagination, Row } from 'react-bootstrap';
+import {  Container, Pagination } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { Grid } from '@mui/material';
+import { handleToast } from '../../config/ConfigToats';
 export default function Index() {
   const [products, setProducts] = useState([]);
   const fetchProducts = () => {
@@ -19,7 +20,7 @@ export default function Index() {
 
   useEffect(() => {
     fetchProducts();
-  }, []);
+  }, [products]);
 
   const [searchTerm, setSearchTerm] = useState("");
   const filtereduser = products.filter(product =>
@@ -36,20 +37,46 @@ export default function Index() {
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
 
-  const handladdCart = (id) => {
-    const user = JSON.parse(localStorage.getItem("user"));
+  const handleAddCart = (id) => {
+    const userStr = localStorage.getItem("user");
+    if (!userStr) return alert("Please login first!");
+    const user = JSON.parse(userStr);
     const userId = user.id;
-    if (!user) return alert("Please login first!");
-    axios.post(`http://localhost:3000/cart`, {
-      "user_id": userId,
-      "product_id": id,
-      "quantity":"1"
-    }).then((response) => {
-    }).catch((err) => {
-      console.log(err);
-    });
-      
-  }
+
+    // Fetch the user's cart to check if the product is already there
+    axios.get(`http://localhost:3000/cart?user_id=${userId}`)
+      .then(response => {
+        const cartItems = response.data;
+        console.log(cartItems);
+        const productInCart = cartItems.find(item => item.product_id === id);
+
+        if (productInCart) {
+          // If the product is already in the cart, increase the quantity
+          axios.patch(`http://localhost:3000/cart/${productInCart.id}`, {
+            quantity: parseInt(productInCart.quantity) + 1
+          })
+            .then(response => {
+              handleToast('success', 'Thêm sản phẩm thành công');
+              console.log('Quantity updated', response.data);
+            })
+            .catch(err => console.error(err));
+        } else {
+          // If the product is not in the cart, add it to the cart
+          axios.post(`http://localhost:3000/cart`, {
+            user_id: userId,
+            product_id: id,
+            quantity: "1"
+          })
+            .then(response => {
+              handleToast('success', 'Thêm sản phẩm thành công');
+              console.log('Product added to cart', response.data);
+            })
+            .catch(err => console.error(err));
+        }
+      })
+      .catch(err => console.error(err));
+  };
+
   return (
     <Container>
       <h1 className='p-3'>Product List</h1>
@@ -72,7 +99,7 @@ export default function Index() {
                   <h5 className="card-title">{product.name}</h5>
                 </Link>
                 <p className="card-text">Price: {formatPrice(product.price)}<br />{product.description}</p>
-                <button onClick={()=>handladdCart(product.id)} className="btn btn-primary">Add to Cart</button>
+                <button onClick={() => handleAddCart(product.id)} className="btn btn-primary">Add to Cart</button>
               </div>
             </div>
           </Grid>

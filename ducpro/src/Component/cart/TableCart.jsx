@@ -8,21 +8,19 @@ import Paper from '@mui/material/Paper';
 import PropTypes from 'prop-types';
 import { Avatar, Button } from '@mui/material';
 import formatPrice from '../formatPrice/formatPrice';
-import axios from 'axios';
 import { useEffect, useState } from 'react';
-function createData(name, calories, fat, carbs, protein) {
-  return { name, calories, fat, carbs, protein };
-}
+import { useNavigate } from 'react-router-dom';
 
 
-export default function TableCart({ data, handleUpdate, handleUpdateInput, handleDetele }) {
-  
+export default function TableCart({ data, handleUpdate, handleUpdateInput, handleDetele, handleDeleteSP }) {
+  const navigate = useNavigate();
+  const ids = data.map(item => item.id);
   const [isDisabled, setIsDisabled] = useState(true);
-  useEffect(() => { 
+  useEffect(() => {
     setIsDisabled(true);
-  },[data])
+  }, [data])
   return (
-    <TableContainer component={Paper}>
+    <TableContainer component={Paper} sx={{ marginTop: 3 }} >
       <Table sx={{ minWidth: 650 }} aria-label="simple table">
         <TableHead>
           <TableRow>
@@ -57,11 +55,21 @@ export default function TableCart({ data, handleUpdate, handleUpdateInput, handl
                 <Button onClick={() => handleUpdate(row.id, "+", row.quantity)}>+</Button>
               </TableCell>
               <TableCell align="right">{formatPrice(row.productDetails.price * row.quantity)}</TableCell>
-              <TableCell align="right">
+              <TableCell align="right" >
                 <Button onClick={() => handleDetele(row.id)} variant="contained">Xóa</Button>
               </TableCell>
             </TableRow>
           ))}
+       
+            <TableRow>
+              <TableCell colSpan={4}>
+                <Button variant="contained" onClick={() => navigate('/')}>Tiếp tục mua sắm</Button>
+              </TableCell>
+              <TableCell align="right">
+              <Button onClick={()=>handleDeleteSP(ids)} variant="contained">Xóa giỏ hàng</Button>
+              </TableCell>
+            </TableRow>
+
         </TableBody>
       </Table>
     </TableContainer>

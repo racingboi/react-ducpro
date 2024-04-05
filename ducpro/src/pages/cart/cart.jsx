@@ -3,7 +3,8 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import TableCart from "../../Component/cart/TableCart";
 import { handleToast } from "../../config/ConfigToats";
-
+import { confirmAlert } from 'react-confirm-alert';
+import 'react-confirm-alert/src/react-confirm-alert.css';
 export default function Cart() {
   const navigate = useNavigate();
   const [carts, setCarts] = useState([]);
@@ -28,7 +29,7 @@ export default function Cart() {
           setEnrichedCart(enrichedCarts); // Assuming setEnrichedCart updates state with the enriched cart items
         })
         .catch(error => console.log(error));
-    } else { 
+    } else {
       setEnrichedCart([]); // Assuming setEnrichedCart
     }
   }, [carts]); // Assuming carts is the correct dependency
@@ -63,16 +64,72 @@ export default function Cart() {
     
   }
   const handleDetele = (id) => {
-    axios.delete(`http://localhost:3000/cart/${id}`)
-      .then((response) => {
-        console.log(response.data);
-        fetchAllCart()
-        handleToast('success', 'Cart delete successfully');
+    confirmAlert({
+      title: 'Xác nhận xóa',
+      message: 'Bạn có chắc muốn xóa sản phẩm này?',
+      buttons: [
+        {
+          label: 'Có',
+          onClick: () => {
+            axios.delete(`http://localhost:3000/cart/${id}`)
+              .then((response) => {
+                console.log(response.data);
+                fetchAllCart();
+                handleToast('success', 'Xóa sản phẩm thành công');
+              })
+              .catch((error) => {
+                console.error('Error deleting item:', error);
+                handleToast('error', 'Đã xảy ra lỗi khi xóa sản phẩm');
+              });
+          }
+        },
+        {
+          label: 'Không',
+          onClick: () => { }
+        }
+      ]
     });
-  }
+  };
+  const handleDeleteSP = (ids) => {
+    confirmAlert({
+      title: 'Xác nhận xóa',
+      message: 'Bạn có chắc muốn xóa các sản phẩm này?',
+      buttons: [
+        {
+          label: 'Có',
+          onClick: () => {
+            for (let i = 0; i < ids.length; i++) {
+              axios(`http://localhost:3000/cart/${ids[i]}`, {
+                method: 'DELETE'
+              })
+                .then(() => {
+                  fetchAllCart();
+                  handleToast('success', 'Xóa sản phẩm thành công');
+                })
+                .catch(error => {
+                  console.error('Error deleting items:', error);
+                  handleToast('error', 'Đã xảy ra lỗi khi xóa sản phẩm');
+                });
+            }
+          }
+        },
+        {
+          label: 'Không',
+          onClick: () => { }
+        }
+      ]
+    });
+  };
   return (
+   
     <>
-      <TableCart data={enrichedCart} handleUpdate={handleUpdate} handleUpdateInput={handleUpdateInput} handleDetele={handleDetele} />
+      <TableCart
+        data={enrichedCart}
+        handleUpdate={handleUpdate}
+        handleUpdateInput={handleUpdateInput}
+        handleDetele={handleDetele}
+        handleDeleteSP={handleDeleteSP}
+      />
     </>
   );
 }
