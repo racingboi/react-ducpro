@@ -21,13 +21,18 @@ export default function Cast() {
   });
   const [carts, setCarts] = React.useState([]);
   const [enrichedCart, setEnrichedCart] = React.useState([]);
+  let userId;
   const user = JSON.parse(localStorage.getItem("user"));
+  if (user && user.id) {
+    userId = user.id;
+  } else {
+    userId = null; // hoặc giá trị mặc định tùy thuộc vào trường hợp của bạn
+  }
   const navigate = useNavigate();
   React.useEffect(() => { 
     fetchAllCart();
   }, [carts])
   React.useEffect(() => {
-
     if (carts && carts.length > 0) {
       Promise.all(carts.map(cart =>
         axios.get(`http://localhost:3000/products/${cart.product_id}`)
@@ -40,7 +45,7 @@ export default function Cast() {
     } else {
       setEnrichedCart([]); 
     }
-  }, [carts]);
+  }, [enrichedCart]);
   const fetchAllCart = () => {
     axios.get(`http://localhost:3000/cart`)
       .then((res) => {
@@ -87,7 +92,7 @@ export default function Cast() {
     navigate('/cart');
   }
   const handleNavigateTT = () => { 
-    navigate('/cart');
+    navigate('/checkoau');
   }
   const list = (anchor) => (
     <Box
@@ -138,9 +143,8 @@ export default function Cast() {
       .catch((error) => console.log(error));
   }
   React.useEffect(() => {
-    const userId = user.id;
     getCartItemCount(userId);
-  }, [getCartItemCount]);
+  }, []);
 
 
   const a = (

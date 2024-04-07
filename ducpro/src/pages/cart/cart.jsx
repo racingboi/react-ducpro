@@ -9,30 +9,35 @@ export default function Cart() {
   const navigate = useNavigate();
   const [carts, setCarts] = useState([]);
   const [enrichedCart, setEnrichedCart] = useState([]);
+  let userId;
   const user = JSON.parse(localStorage.getItem("user"));
+  if (user && user.id) {
+    userId = user.id;
+  } else {
+    userId = null;
+  }
 
   useEffect(() => {
-    if (user && user.id) {
+    if (userId) {
       fetchAllCart()
     } else {
       navigate('/login');
     }
   }, []);
   useEffect(() => {
-    // Ensure carts is not undefined and has items
     if (carts && carts.length > 0) {
       Promise.all(carts.map(cart =>
         axios.get(`http://localhost:3000/products/${cart.product_id}`)
           .then(res => ({ ...cart, productDetails: res.data }))
       ))
         .then(enrichedCarts => {
-          setEnrichedCart(enrichedCarts); // Assuming setEnrichedCart updates state with the enriched cart items
+          setEnrichedCart(enrichedCarts); 
         })
         .catch(error => console.log(error));
     } else {
-      setEnrichedCart([]); // Assuming setEnrichedCart
+      setEnrichedCart([]);
     }
-  }, [carts]); // Assuming carts is the correct dependency
+  }, [carts]);
   const fetchAllCart = () => {
     axios.get(`http://localhost:3000/cart`)
       .then((res) => {
@@ -48,7 +53,7 @@ export default function Cart() {
       fetchAllCart()
       handleToast('success', 'Cart updated successfully');
     });
-  } // AssumingichedCart);
+  }
 
   const handleUpdateInput = (e) => {
     e.preventDefault();

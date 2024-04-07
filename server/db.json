@@ -101,16 +101,42 @@
   ],
   "cart": [
     {
-      "user_id": "1RJa_Yv",
-      "product_id": 8,
+      "user_id": "K5qi4ky",
+      "product_id": 9,
       "quantity": "1",
       "id": 1
     },
     {
-      "user_id": "1RJa_Yv",
-      "product_id": 9,
+      "user_id": "K5qi4ky",
+      "product_id": 10,
       "quantity": "1",
       "id": 2
+    }
+  ],
+  "order": [
+    {
+      "customer_id": "K5qi4ky",
+      "Province": "249",
+      "District": "1768",
+      "ward": "190213",
+      "sdt": "0972550968",
+      "tenKH": "duc",
+      "email": "user@gmail.com",
+      "paymentMethod": "1",
+      "total": 304108,
+      "id": 1
+    },
+    {
+      "customer_id": "K5qi4ky",
+      "Province": "268",
+      "District": "2046",
+      "ward": "220910",
+      "sdt": "0607252156",
+      "tenKH": "ducpro",
+      "email": "user@gmail.com",
+      "paymentMethod": "1",
+      "total": 311108,
+      "id": 3
     }
   ]
 }

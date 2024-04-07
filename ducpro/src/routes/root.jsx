@@ -17,6 +17,7 @@ import NotFound from "../pages/NotFound/NotFound";
 import NotFoundAdmin from "../pages/NotFound/NotFoundAdmin";
 import CheckOau from "../pages/checkoau/CheckOau";
 
+
 export const AppRouter = () => {
   let element = useRoutes([
     {
@@ -88,7 +89,8 @@ export const AppRouter = () => {
         {
           path: 'checkoau',
           element: < CheckOau />
-        }
+        },
+       
       ],
     }
   ]);

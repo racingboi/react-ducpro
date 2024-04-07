@@ -65,7 +65,6 @@ export default function GioHang() {
                 </small>
               </div>
             </div>
-
             <span className="text-muted">{formatPrice(cart.productDetails.price*cart.quantity)}</span>
           </li>
         ))}
@@ -74,7 +73,6 @@ export default function GioHang() {
           <strong>{formatPrice(totalPrice)}</strong>
         </li>
       </ul>
-
       <div className="input-group">
         <input type="text" className="form-control" placeholder="Mã khuyến mãi" />
         <div className="input-group-append">
