@@ -50,72 +50,50 @@
   ],
   "products": [
     {
+      "name": "đức trương",
+      "price": "120000",
+      "description": "111111",
+      "img": "https://images.fpt.shop/unsafe/filters:quality(90)/fptshop.com.vn/uploads/images/tin-tuc/164401/Originals/cung-cu-giai-nam-2.jpg",
+      "id": 2
+    },
+    {
+      "name": "đức trương",
+      "price": "120000",
+      "description": "111111",
+      "img": "https://images.fpt.shop/unsafe/filters:quality(90)/fptshop.com.vn/uploads/images/tin-tuc/164401/Originals/cung-cu-giai-nam-2.jpg",
+      "caterory_id": "",
+      "id": 3
+    },
+    {
+      "name": "dam cua",
+      "price": "120000",
+      "description": "cua nhay dam",
+      "img": "https://images.fpt.shop/unsafe/filters:quality(90)/fptshop.com.vn/uploads/images/tin-tuc/164401/Originals/cung-cu-giai-nam-2.jpg",
+      "caterory_id": "",
+      "id": 4
+    }
+  ],
+  "caterory": [
+    {
+      "name": "cá",
+      "id": "1"
+    },
+    {
       "name": "cua",
-      "price": "120000",
-      "description": "dam cua",
-      "img": "https://images.fpt.shop/unsafe/filters:quality(90)/fptshop.com.vn/uploads/images/tin-tuc/164401/Originals/cung-cu-giai-nam-2.jpg",
-      "id": 8
-    },
-    {
-      "name": "ducpro",
-      "price": "120000",
-      "description": "11111",
-      "img": "https://images.fpt.shop/unsafe/filters:quality(90)/fptshop.com.vn/uploads/images/tin-tuc/164401/Originals/cung-cu-giai-nam-2.jpg",
-      "id": 9
-    },
-    {
-      "name": "111",
-      "price": "111",
-      "description": "aaaa",
-      "img": "https://images.fpt.shop/unsafe/filters:quality(90)/fptshop.com.vn/uploads/images/tin-tuc/164401/Originals/cung-cu-giai-nam-2.jpg",
-      "id": 10
-    },
-    {
-      "name": "đức trương",
-      "price": "12",
-      "description": "111111",
-      "img": "https://images.fpt.shop/unsafe/filters:quality(90)/fptshop.com.vn/uploads/images/tin-tuc/164401/Originals/cung-cu-giai-nam-2.jpg",
-      "id": 11
-    },
-    {
-      "name": "vippro 1111",
-      "price": "3000.000",
-      "description": "no thing",
-      "img": "https://images.fpt.shop/unsafe/filters:quality(90)/fptshop.com.vn/uploads/images/tin-tuc/164401/Originals/cung-cu-giai-nam-2.jpg",
-      "id": 13
-    },
-    {
-      "name": "đức trương",
-      "price": "120000",
-      "description": "111111",
-      "img": "https://images.fpt.shop/unsafe/filters:quality(90)/fptshop.com.vn/uploads/images/tin-tuc/164401/Originals/cung-cu-giai-nam-2.jpg",
-      "id": 14
-    },
-    {
-      "name": "đức trương",
-      "price": "120000",
-      "description": "111111",
-      "img": "https://images.fpt.shop/unsafe/filters:quality(90)/fptshop.com.vn/uploads/images/tin-tuc/164401/Originals/cung-cu-giai-nam-2.jpg",
-      "id": 15
+      "id": "mhfZ2Cm"
     }
   ],
   "cart": [
     {
-      "user_id": "K5qi4ky",
-      "product_id": 9,
+      "user_id": "1RJa_Yv",
+      "product_id": 2,
       "quantity": "1",
       "id": 1
-    },
-    {
-      "user_id": "K5qi4ky",
-      "product_id": 10,
-      "quantity": "1",
-      "id": 2
     }
   ],
   "order": [
     {
-      "customer_id": "K5qi4ky",
+      "customer_id": "1RJa_Yv",
       "Province": "249",
       "District": "1768",
       "ward": "190213",
@@ -123,20 +101,9 @@
       "tenKH": "duc",
       "email": "user@gmail.com",
       "paymentMethod": "1",
-      "total": 304108,
-      "id": 1
-    },
-    {
-      "customer_id": "K5qi4ky",
-      "Province": "268",
-      "District": "2046",
-      "ward": "220910",
-      "sdt": "0607252156",
-      "tenKH": "ducpro",
-      "email": "user@gmail.com",
-      "paymentMethod": "1",
-      "total": 311108,
-      "id": 3
+      "total": 423997,
+      "id": 1,
+      "staus": "chờ xác nhận"
     }
   ]
 }

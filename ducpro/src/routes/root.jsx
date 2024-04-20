@@ -16,6 +16,8 @@ import Cart from "../pages/cart/cart";
 import NotFound from "../pages/NotFound/NotFound";
 import NotFoundAdmin from "../pages/NotFound/NotFoundAdmin";
 import CheckOau from "../pages/checkoau/CheckOau";
+import Caterory from "../pages/admin/caterory/Caterory";
+import Order from "../pages/admin/order/Order";
 
 
 export const AppRouter = () => {
@@ -43,6 +45,14 @@ export const AppRouter = () => {
           element: <User />
         },
         {
+          path: '/dashboard/caterory',
+          element: < Caterory />
+        },
+        {
+          path: '/dashboard/order',
+          element: < Order />
+        }
+        , {
           path: '*',
           element: < NotFoundAdmin />
         }

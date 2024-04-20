@@ -1,17 +1,37 @@
 var express = require('express');
 var path = require('path');
-var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var order = require('./routes/order');
-
+const cors = require('cors');
 var app = express();
 
-// view engine setup
+app.options('*', cors());  // Enable preflight request for all routes, adjust as necessary
+
+app.use(cors({
+  origin: 'http://localhost:5173',  // Your client's origin
+  methods: ['GET', 'POST', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization']
+}));
+app.use((req, res, next) => {
+  res.header('Access-Control-Allow-Origin', 'http://localhost:5173'); // Adjust according to your needs
+  res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
+  res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+  if (req.method === 'OPTIONS') {
+    res.sendStatus(200);
+  } else {
+    next();
+  }
+});
+
+// app.use(cors())
+app.use(express.json()); 
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 
+
+app.listen(3000, () => console.log('Proxy server running on http://localhost:3000'));
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(logger('dev'));

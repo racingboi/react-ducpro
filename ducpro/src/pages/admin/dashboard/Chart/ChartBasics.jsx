@@ -8,13 +8,13 @@ export default function ChartBasics() {
   };
 
   const dataset = [
-    { london: 59, paris: 57, month: 'T2', },
-    { london: 50, paris: 52, month: 'T3', },
-    { london: 47, paris: 53, month: 'T4', },
-    { london: 54, paris: 56, month: 'T5', },
-    { london: 57, paris: 69, month: 'T6', },
-    { london: 60, paris: 63, month: 'T7', },
-    { london: 59, paris: 60, month: 'CN', },
+    { london: 2, paris: 5, month: 'T2', },
+    { london: 5, paris: 2, month: 'T3', },
+    { london: 4, paris: 3, month: 'T4', },
+    { london: 4, paris: 5, month: 'T5', },
+    { london: 5, paris: 6, month: 'T6', },
+    { london: 1, paris: 3, month: 'T7', },
+    { london: 9, paris: 5, month: 'CN', },
   ];
 
   const valueFormatterSales = (value) => `${value} đã bán`;

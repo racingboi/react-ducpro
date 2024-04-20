@@ -36,7 +36,7 @@ export default function ThongKe() {
         <Item>
           <div>
             <ListItemText><BoldText>Số người dùng</BoldText></ListItemText>
-            <ListItemText>40</ListItemText>
+            <ListItemText>4</ListItemText>
           </div>
           <PersonOutlineIcon sx={{ fontSize: 60 }} />
         </Item>
@@ -45,7 +45,7 @@ export default function ThongKe() {
         <Item>
           <div>
             <ListItemText><BoldText>Tổng tiền lời</BoldText></ListItemText>
-            <ListItemText>12,000,000,000 VND</ListItemText>
+            <ListItemText>12,000,000 VND</ListItemText>
           </div>
           <LocalAtmIcon sx={{ fontSize: 60 }} />
         </Item>
@@ -54,7 +54,7 @@ export default function ThongKe() {
         <Item>
           <div>
             <ListItemText><BoldText>Số lượng hàng đã nhập</BoldText></ListItemText>
-            <ListItemText>100</ListItemText>
+            <ListItemText>2</ListItemText>
           </div>
           <AddShoppingCartIcon sx={{ fontSize: 60 }} />
         </Item>
@@ -63,7 +63,7 @@ export default function ThongKe() {
         <Item>
           <div>
             <ListItemText><BoldText>Số lượng hàng đã bán</BoldText></ListItemText>
-            <ListItemText>100</ListItemText>
+            <ListItemText>2</ListItemText>
           </div>
           <ShoppingCartCheckoutIcon sx={{ fontSize: 60 }} />
         </Item>

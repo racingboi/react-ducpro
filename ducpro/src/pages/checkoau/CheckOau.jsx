@@ -1,9 +1,9 @@
 // import axios from 'axios';
 import { useEffect, useState } from "react";
 import axios from 'axios';
-import { useNavigate } from "react-router-dom";
 import formatPrice from "../../Component/formatPrice/formatPrice";
 import { Avatar } from '@mui/material';
+import { handleToast } from "../../config/ConfigToats";
 const apiUrl = 'https://online-gateway.ghn.vn/shiip/public-api';
 const apiKey = '7293aab0-b9b0-11ee-b38e-f6f098158c7e';
 export default function CheckOau() {
@@ -178,102 +178,68 @@ export default function CheckOau() {
   const [carts, setCarts] = useState([]);
   const [enrichedCart, setEnrichedCart] = useState([]);
   const user = JSON.parse(localStorage.getItem("user"));
-  const navigate = useNavigate();
-  useEffect(() => {
-    if (user && user.id) {
-      fetchAllCart();
-    } else {
-      navigate("/login");
-    }
-  }, []);
 
   useEffect(() => {
-    if (carts && carts.length > 0) {
-      Promise.all(
-        carts.map((cart) =>
-          axios
-            .get(`http://localhost:3000/products/${cart.product_id}`)
-            .then((res) => ({ ...cart, productDetails: res.data }))
-        )
-      )
-        .then((enrichedCarts) => {
-          setEnrichedCart(enrichedCarts);
-        })
-    } else {
-      setEnrichedCart([]);
-    }
-  }, [enrichedCart, carts]);
+    fetchAllCart()
+      .then(() => {
+        if (enrichedCart ) {
+          fetchProducts();
+        }
+      });
+  }, [enrichedCart]);
 
-  const fetchAllCart = () => {
-    axios
-      .get(`http://localhost:3000/cart`)
-      .then((res) => {
-        setCarts(res.data);
-      })
+  const fetchAllCart = async () => {
+    try {
+      const response = await axios.get(`http://localhost:3000/cart`);
+      setCarts(response.data);
+    } catch (error) {
+      console.error("Error fetching cart data:", error);
+    }
   };
-  
-  const handleC = async (e) => {
-    e.preventDefault();
-    // if (paymentMethod === 1) {
-    //   axios.post(`http://localhost:3000/order`, {
-    //     customer_id: user.id,
-    //     Province: selectedProvince,
-    //     District: selectedDistrict,
-    //     ward: selectedWard,
-    //     sdt: phone,
-    //     tenKH: ten,
-    //     email: email,
-    //     paymentMethod: paymentMethod,
-    //     total: total
-    //   })
-    // }
-    if (paymentMethod === "2") {
-      const paymentData = {
-        orderId: user.id,
-        amount: total * 100,
-        orderInfo: "Thanh toán hóa đơn mua hàng",
-        bankCode: "",
-        language: "vn",
-        customerName: ten,
-        customerEmail: email,
-        customerPhone: phone,
-      };
-      try {
-        const response = await axios.post(`http://localhost:8888/order/create_payment_url`);
-        window.open(response, '_blank');
-      } catch (error) {
-        console.error('Error creating payment URL', error);
-      }
 
+  const fetchProducts = async () => {
+    try {
+      const enrichedCarts = await Promise.all(
+        carts.map(async (cart) => {
+          const response = await axios.get(`http://localhost:3000/products/${cart.product_id}`);
+          return { ...cart, productDetails: response.data };
+        })
+      );
+      setEnrichedCart(enrichedCarts);
+    } catch (error) {
+      console.error("Error fetching product details:", error);
     }
-    
-  }
+  };
+  const handleC = async (e) => {
+    // Prevent default event behavior at the beginning
+    e.preventDefault();
+    if (paymentMethod === '1') {
+        // Post order
+        const orderResponse = await axios.post(`http://localhost:3000/order`, {
+          customer_id: user.id,
+          Province: selectedProvince,
+          District: selectedDistrict,
+          ward: selectedWard,
+          sdt: phone,
+          tenKH: ten,
+          email: email,
+          paymentMethod: paymentMethod,
+          total: total,
+          staus: 'chờ xác nhận', // Spelling correction: changed 'staus' to 'status'
+        });
 
+      handleToast('success', 'Đăng hàng thành công')
 
-    //   axios.post(`http://localhost:3000/order`, {
-    //     customer_id: user.id,
-    //     Province: selectedProvince,
-    //     District: selectedDistrict,
-    //     ward: selectedWard,
-    //     sdt: phone,
-    //     tenKH: ten,
-    //     email: email,
-    //     paymentMethod: paymentMethod,
-    //     total: total
-    //   });
-    // }
-    // const ids = enrichedCart.map(item => item.id);
-    // for (let i = 0; i < ids.length; i++) {
-    //   axios.delete(`http://localhost:3000/cart/${ids[i]}`)
-    //     .then(response => {
-    //       // Xử lý khi request thành công nếu cần
-    //       console.log(`Xóa sản phẩm có id ${ids[i]} thành công.`);
-    //     })
-    //     .catch(error => {
-    //       // Xử lý khi request gặp lỗi nếu cần
-    //       console.error(`Xóa sản phẩm có id ${ids[i]} thất bại:`, error);
-    //     });
-    // }
+        // Delete cart items
+        const ids = enrichedCart.map(item => item.id);
+          // Use Promise.all to delete all cart items concurrently
+          const deleteRequests = ids.map(id => axios.delete(`http://localhost:3000/cart/${id}`));
+          await Promise.all(deleteRequests);
+          console.log("All cart items deleted successfully.");
+        
+     
+    }
+  };
 
   const totalPrice = enrichedCart.reduce((total, item) => total + item.quantity * item.productDetails.price, 0);
   const total = totalPrice + fee;

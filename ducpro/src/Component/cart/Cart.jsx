@@ -31,7 +31,7 @@ export default function Cast() {
   const navigate = useNavigate();
   React.useEffect(() => { 
     fetchAllCart();
-  }, [carts])
+  }, [enrichedCart])
   React.useEffect(() => {
     if (carts && carts.length > 0) {
       Promise.all(carts.map(cart =>
@@ -45,7 +45,7 @@ export default function Cast() {
     } else {
       setEnrichedCart([]); 
     }
-  }, [enrichedCart]);
+  }, [carts]);
   const fetchAllCart = () => {
     axios.get(`http://localhost:3000/cart`)
       .then((res) => {
@@ -144,7 +144,7 @@ export default function Cast() {
   }
   React.useEffect(() => {
     getCartItemCount(userId);
-  }, []);
+  }, [enrichedCart]);
 
 
   const a = (

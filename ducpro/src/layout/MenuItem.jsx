@@ -22,4 +22,13 @@ export const navigationItems = [
       { id: 'list-user', text: 'List User', path: '/dashboard/user', icon: <ListIcon /> },
     ]
   },
+  {
+    id: 'caterory', text: 'caterory', icon: <PersonIcon />, path: '/dashboard/caterory',
+    children: [
+      { id: 'add-user', text: 'Add caterory', path: '/dashboard/caterory', icon: <AddIcon /> },
+      { id: 'list-user', text: 'List caterory', path: '/dashboard/caterory', icon: <ListIcon /> },
+    ]
+  }, {
+    id: 'order', text: 'order', icon: <PersonIcon />, path: '/dashboard/order',
+  }
 ];
